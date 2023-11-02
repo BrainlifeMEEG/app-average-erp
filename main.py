@@ -61,7 +61,7 @@ report.add_evoked(evo, title='Evoked response for condition '+cond)
 report.add_figs_to_section(fig, captions='Evoked response for condition '+cond)
 
 # == SAVE REPORT ==
-report.save(os.path.join('out_dir','report.html'))
+report.save(os.path.join('out_dir_report','report.html'))
 
 # == SAVE FIGURE ==
 fig.savefig(os.path.join('out_figs', 'evoked.png'))
