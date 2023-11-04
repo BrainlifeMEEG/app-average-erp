@@ -55,7 +55,7 @@ fig = evo.plot_joint(title='Evoked response for condition '+cond)
 report = mne.Report(title='Report')
 
 #Add evoked to the report
-report.add_evokeds(evo, title='Evoked response for condition '+cond)
+report.add_evokeds(evo, titles='Evoked response for condition '+cond)
 
 #Add figure of evoked response to the report
 #report.add_figs_to_section(fig, captions='Evoked response for condition '+cond)
