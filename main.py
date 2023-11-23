@@ -62,7 +62,7 @@ report = mne.Report(title='Report')
 report.add_evokeds(evo, titles='Evoked response for condition '+cond)
 
 #Add figure of evoked response to the report
-report.add_figure(fig, title='Evoked response for condition '+cond, captions='Evoked response for condition '+cond)
+report.add_figure(fig, title='Evoked response for condition '+cond)
 
 # == SAVE REPORT ==
 report.save(os.path.join('out_dir_report','report.html'))
