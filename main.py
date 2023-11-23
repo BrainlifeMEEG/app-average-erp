@@ -59,7 +59,7 @@ fig = evo.plot_joint(times = peaks)
 report = mne.Report(title='Report')
 
 #Add evoked to the report
-report.add_evokeds(evo, title='Evoked response for condition '+cond)
+report.add_evokeds(evo, titles='Evoked response for condition '+cond)
 
 #Add figure of evoked response to the report
 report.add_figure(fig, title='Evoked response for condition '+cond, captions='Evoked response for condition '+cond)
