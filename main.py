@@ -17,10 +17,6 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-
-import mne
-
-
 # Current path
 __location__ = os.path.realpath(
     os.path.join(os.getcwd(), os.path.dirname(__file__)))
@@ -34,10 +30,21 @@ epochs = config.pop('fname')
 # Read in the epochs file
 epo = mne.read_epochs(epochs)
 
-# Read the names of the stimuli and the name of the condition
-stimuli = config.pop('stimulus_names')
-stimuli = stimuli.split(',')
-cond = config.pop('condition')
+#Read in the average-all bool from config
+average_all = config.pop('average_all')
+
+#If average_all is true, average all epochs
+if average_all == 'True':
+    epo = epo.average()
+    cond = 'All'
+else:
+    # Read the names of the stimuli and the name of the condition
+    stimuli = config.pop('stimulus_names')
+    stimuli = stimuli.split(',')
+    #Create the evoked object from epo at stimulus conditions
+    evo = epo[stimuli].average()
+    cond = config.pop('condition')
+    
 peaks = config.pop('peaks')
 
 if peaks == 'None':
@@ -46,11 +53,8 @@ else:
     peaks = peaks.split(',')
     peaks = [float(i) for i in peaks]
 
-#Create the evoked object from epo at stimulus conditions
-evo = epo[stimuli].average()
-
 #Create figure of evoked response
-fig = evo.plot_joint(title='Evoked response for condition '+cond, times = peaks)
+fig = evo.plot_joint(times = peaks)
 
 report = mne.Report(title='Report')
 
@@ -58,10 +62,10 @@ report = mne.Report(title='Report')
 report.add_evoked(evo, title='Evoked response for condition '+cond)
 
 #Add figure of evoked response to the report
-report.add_figs_to_section(fig, captions='Evoked response for condition '+cond)
+report.add_figure(fig, title='Evoked response for condition '+cond, captions='Evoked response for condition '+cond)
 
 # == SAVE REPORT ==
-report.save(os.path.join('out_dir','report.html'))
+report.save(os.path.join('out_dir_report','report.html'))
 
 # == SAVE FIGURE ==
 fig.savefig(os.path.join('out_figs', 'evoked.png'))
