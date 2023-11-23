@@ -1,7 +1,8 @@
-{
+s{
 
     "fname": "/N/slate/ksalibay/DataLatinus/S01/ContinuousDataFiles/epo.fif",
     "stimulus_names": "LEA_D_2,REA_D_2",
     "condition": "Ext-Dir",
-    "average-all": false
+    "average-all": false,
+    "peaks": "0.170,0.300"
 }
